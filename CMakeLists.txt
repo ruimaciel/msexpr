@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)	# required by google tests
+cmake_minimum_required(VERSION 3.7)
 
 project(msexpr
     VERSION 0.0.1.0
