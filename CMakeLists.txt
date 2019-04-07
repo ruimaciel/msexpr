@@ -12,10 +12,12 @@ set(msexpr_INCLUDES
 set(msexpr_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_ops.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_stack.c
     )
 
 set(msexpr_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_ops.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_stack.h
     )
 
 add_library(${PROJECT_NAME}
