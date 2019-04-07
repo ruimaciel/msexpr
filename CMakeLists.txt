@@ -1,0 +1,46 @@
+cmake_minimum_required(VERSION 3.9)	# required by google tests
+
+project(msexpr
+    VERSION 0.0.1.0
+    LANGUAGES C
+    )
+
+set(msexpr_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/msexpr/sexpr.h
+    )
+
+set(msexpr_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_ops.c
+    )
+
+set(msexpr_HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_ops.h
+    )
+
+add_library(${PROJECT_NAME}
+    ${msexpr_INCLUDES}
+    ${msexpr_SOURCES}
+    ${msexpr_HEADERS}
+    )
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+set_target_properties(
+    ${PROJECT_NAME} PROPERTIES
+    C_STANDARD 90
+    C_STANDARD_REQUIRED ON
+    C_EXTENSIONS OFF
+    )
+
+option(ENABLE_TESTS "Enable tests" ON)
+if (${ENABLE_TESTS})
+    enable_testing()
+    add_subdirectory(tests)
+endif()
