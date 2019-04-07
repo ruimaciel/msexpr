@@ -1,6 +1,6 @@
 # M's S-Expressions library 
 
-![Travis (.com) branch](https://img.shields.io/travis/com/ruimaciel/msexpr/develop.svg)
+![CircleCI branch](https://img.shields.io/circleci/project/github/ruimaciel/msexpr/master.svg)
 ![License](https://img.shields.io/github/license/ruimaciel/msexpr.svg)
 ![Language](https://img.shields.io/github/languages/top/ruimaciel/msexpr.svg)
 ![Code size](https://img.shields.io/github/languages/code-size/ruimaciel/msexpr.svg)
