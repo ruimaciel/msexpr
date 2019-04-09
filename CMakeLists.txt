@@ -7,12 +7,14 @@ project(msexpr
 
 set(msexpr_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/msexpr/sexpr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/msexpr/serializers.h
     )
 
 set(msexpr_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_ops.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_stack.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/serializers.c
     )
 
 set(msexpr_HEADERS
