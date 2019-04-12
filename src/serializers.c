@@ -4,6 +4,7 @@ int msexpr_fprint_csexpr(FILE *stream, struct msexpr *sexpr)
 {
     if(sexpr == NULL)
     {
+        fprintf(stream,"nil");
         return 0;
     }
 
@@ -13,6 +14,7 @@ int msexpr_fprint_csexpr(FILE *stream, struct msexpr *sexpr)
 
     case MSEXPR_TYPE_NULL:
     {
+        fprintf(stream,"nil");
     }
         break;
 
