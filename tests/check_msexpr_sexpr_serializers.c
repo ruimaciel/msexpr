@@ -17,6 +17,19 @@ START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
 }
 END_TEST
 
+START_TEST(test_sexpr_GIVEN_integer_WHEN_THEN_)
+{
+    /* Given */
+    struct  msexpr_cell *cell = (struct msexpr_cell *)msexpr_cons(msexpr_make_integer(42), NULL);
+
+    /* When */
+    msexpr_fprint_csexpr(stdout, cell);
+
+    /* Then */
+    ck_assert_ptr_eq(NULL, NULL);
+}
+END_TEST
+
 //START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
 //{
 //	/* Given */
@@ -36,6 +49,7 @@ Suite * msexpr_suite(void)
     tc_core = tcase_create("sexpr ops");
 
     tcase_add_test(tc_core, test_sexpr_GIVEN_WHEN_THEN_);
+    tcase_add_test(tc_core, test_sexpr_GIVEN_integer_WHEN_THEN_);
 
     suite_add_tcase(s, tc_core);
 

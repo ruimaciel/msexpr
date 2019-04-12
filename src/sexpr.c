@@ -25,8 +25,12 @@ void msexpr_free(struct msexpr ** sexpr)
 
 	switch( (*sexpr)->type )
 	{
-	case MSEXPR_TYPE_ATOM_TEXT:
-		msexpr_free_atom_text( (struct msexpr_atom_text **)(sexpr));
+    case MSEXPR_TYPE_ATOM_TEXT:
+        msexpr_free_atom_text( (struct msexpr_atom_text **)(sexpr));
+        break;
+
+    case MSEXPR_TYPE_ATOM_INTEGER:
+        msexpr_free_atom_integer( (struct msexpr_atom_integer **)(sexpr));
 		break;
 
 	case MSEXPR_TYPE_CELL:
@@ -53,6 +57,22 @@ struct msexpr * msexpr_make_text(char * text, const size_t length)
 	atom->length = length;
 
 	return (struct msexpr *)atom;
+}
+
+struct msexpr * msexpr_make_integer(const long int value)
+{
+    struct msexpr_atom_integer *atom = (struct msexpr_atom_integer *)malloc(sizeof(struct msexpr_atom_integer));
+
+    if(atom == NULL)
+    {
+        return NULL;
+    }
+
+    /* init the integer atom */
+    atom->sexpr.type = MSEXPR_TYPE_ATOM_INTEGER;
+    atom->value = value;
+
+    return (struct msexpr *)atom;
 }
 
 struct msexpr * msexpr_cons(struct msexpr *car, struct msexpr *cdr)

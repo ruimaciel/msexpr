@@ -25,6 +25,13 @@ int msexpr_fprint_csexpr(FILE *stream, struct msexpr *sexpr)
     }
         break;
 
+    case MSEXPR_TYPE_ATOM_INTEGER:
+    {
+        struct msexpr_atom_integer* sexpr_number = (struct msexpr_atom_integer*)sexpr;
+        fprintf(stream,"%li", sexpr_number->value);
+    }
+        break;
+
     case MSEXPR_TYPE_CELL:
     {
         fprintf(stream,"(");

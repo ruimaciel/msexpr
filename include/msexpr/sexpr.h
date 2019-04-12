@@ -9,6 +9,7 @@ enum msexpr_type
 	MSEXPR_TYPE_NULL = 0
 	, MSEXPR_TYPE_CELL			/* a s-expression cell, which includes a car and a cdr field */
 	, MSEXPR_TYPE_ATOM_TEXT		/* a text string atom*/
+    , MSEXPR_TYPE_ATOM_INTEGER  /* an integer atom*/
 };
 
 /*
@@ -29,15 +30,23 @@ struct msexpr_cell
 
 struct msexpr_atom_text
 {
+    struct msexpr sexpr;
+    size_t length;
+    char * text;
+};
+
+struct msexpr_atom_integer
+{
 	struct msexpr sexpr;
 	size_t length;
-	char * text;
+    long int value;
 };
 
 int msexpr_init(struct msexpr * sexpr);
 void msexpr_free(struct msexpr ** sexpr);
 
 struct msexpr * msexpr_make_text(char * text, const size_t length);
+struct msexpr * msexpr_make_integer(const long int value);
 struct msexpr * msexpr_cons(struct msexpr *car, struct msexpr *cdr);
 
 #endif
