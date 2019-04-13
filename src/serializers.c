@@ -1,5 +1,10 @@
 #include <msexpr/serializers.h>
 
+int msexpr_fprint_csexpr_text_netstring(FILE *stream, const char *text, size_t length)
+{
+    return fprintf(stream,"%lu:%s", length, text);
+}
+
 int msexpr_fprint_csexpr(FILE *stream, struct msexpr *sexpr)
 {
     if(sexpr == NULL)
@@ -21,7 +26,7 @@ int msexpr_fprint_csexpr(FILE *stream, struct msexpr *sexpr)
     case MSEXPR_TYPE_ATOM_TEXT:
     {
         struct msexpr_atom_text* sexpr_text = (struct msexpr_atom_text*)sexpr;
-        fprintf(stream,"%lu:%s", sexpr_text->length, sexpr_text->text);
+        msexpr_fprint_csexpr_text_netstring(stream, sexpr_text->text, sexpr_text->length);
     }
         break;
 
