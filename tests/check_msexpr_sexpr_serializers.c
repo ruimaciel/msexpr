@@ -4,29 +4,33 @@
 
 #include <msexpr/serializers.h>
 
-START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
+START_TEST(test_sexpr_GIVEN_cons_cell_with_text_atom_and_null_WHEN_fprint_csexpr_THEN_retval_is_zero)
 {
     /* Given */
-    struct  msexpr_cell *cell = (struct msexpr_cell *)msexpr_cons(msexpr_make_text("foo",3), NULL);
+    struct  msexpr *cell = (struct msexpr *)msexpr_cons(msexpr_make_text("foo",3), NULL);
 
     /* When */
-    msexpr_fprint_csexpr(stdout, cell);
+    fprintf(stdout,"\n");
+    int retval = msexpr_fprint_csexpr(stdout, cell);
+    fprintf(stdout,"\n");
 
     /* Then */
-    ck_assert_ptr_eq(NULL, NULL);
+    ck_assert_int_eq(retval, 0);
 }
 END_TEST
 
-START_TEST(test_sexpr_GIVEN_integer_WHEN_THEN_)
+START_TEST(test_sexpr_GIVEN_cons_cell_with_integer_atom_and_null_WHEN_fprint_csexpr_THEN_retval_is_zero)
 {
     /* Given */
-    struct  msexpr_cell *cell = (struct msexpr_cell *)msexpr_cons(msexpr_make_integer(42), NULL);
+    struct  msexpr *cell = (struct msexpr *)msexpr_cons(msexpr_make_integer(42), NULL);
 
     /* When */
-    msexpr_fprint_csexpr(stdout, cell);
+    fprintf(stdout,"\n");
+    int retval = msexpr_fprint_csexpr(stdout, cell);
+    fprintf(stdout,"\n");
 
     /* Then */
-    ck_assert_ptr_eq(NULL, NULL);
+    ck_assert_int_eq(retval, 0);
 }
 END_TEST
 
@@ -48,8 +52,8 @@ Suite * msexpr_suite(void)
     /* Core test case */
     tc_core = tcase_create("sexpr ops");
 
-    tcase_add_test(tc_core, test_sexpr_GIVEN_WHEN_THEN_);
-    tcase_add_test(tc_core, test_sexpr_GIVEN_integer_WHEN_THEN_);
+    tcase_add_test(tc_core, test_sexpr_GIVEN_cons_cell_with_text_atom_and_null_WHEN_fprint_csexpr_THEN_retval_is_zero);
+    tcase_add_test(tc_core, test_sexpr_GIVEN_cons_cell_with_integer_atom_and_null_WHEN_fprint_csexpr_THEN_retval_is_zero);
 
     suite_add_tcase(s, tc_core);
 
