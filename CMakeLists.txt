@@ -53,3 +53,14 @@ if (${ENABLE_TESTS})
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+# configure library installation
+install(TARGETS ${PROJECT_NAME}
+     ARCHIVE DESTINATION lib
+     LIBRARY DESTINATION lib
+     RUNTIME DESTINATION bin
+     )
+
+install(FILES ${msexpr_INCLUDES}
+     DESTINATION include/msexpr
+     )
