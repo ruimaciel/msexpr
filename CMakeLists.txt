@@ -64,3 +64,8 @@ install(TARGETS ${PROJECT_NAME}
 install(FILES ${msexpr_INCLUDES}
      DESTINATION include/msexpr
      )
+
+# support for packaging with CPack
+set(CPACK_PACKAGE_CONTACT "Rui Maciel rui.maciel@gmail.com")
+
+include(CPack)
