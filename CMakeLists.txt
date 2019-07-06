@@ -5,9 +5,14 @@ project(msexpr
     LANGUAGES C
     )
 
+configure_file(version.h.in
+    "${CMAKE_CURRENT_BINARY_DIR}/version.h" @ONLY
+  )
+
 set(msexpr_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/msexpr/sexpr.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/msexpr/serializers.h
+    ${CMAKE_CURRENT_BINARY_DIR}/version.h
     )
 
 set(msexpr_SOURCES
