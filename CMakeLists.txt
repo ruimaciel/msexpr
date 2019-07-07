@@ -27,7 +27,7 @@ set(msexpr_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sexpr_stack.h
     )
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
     ${msexpr_INCLUDES}
     ${msexpr_SOURCES}
     ${msexpr_HEADERS}
@@ -46,6 +46,7 @@ set_target_properties(
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
+    POSITION_INDEPENDENT_CODE ON
     )
 
 option(ENABLE_TESTS "Enable tests" ON)
