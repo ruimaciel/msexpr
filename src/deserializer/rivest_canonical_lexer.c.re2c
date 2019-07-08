@@ -1,0 +1,84 @@
+#include "rivest_canonical_lexer.h"
+
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+#include <errno.h>
+
+struct token_t rivest_canonical_lexer(FILE * stream, struct input_t * input)
+{
+    assert(stream != NULL);
+    assert(input != NULL);
+
+    errno = 0;
+
+    if(input->buffer == NULL)
+    {
+        input_fill(stream,input,1);
+    }
+
+    input->token = input->cursor;
+    unsigned char *t2 = input->token;
+
+    /*!re2c
+        re2c:define:YYCTYPE = char;
+        re2c:define:YYCURSOR = input->cursor;
+        re2c:define:YYMARKER = input->marker;
+        re2c:define:YYLIMIT  = input->limit;
+        re2c:yyfill:enable = 0;
+
+        end = "\x00";
+        decimal = [1-9][0-9]*;
+
+        '('		{
+            return (struct token_t) {TOKEN_RIVEST_PARENTHESIS_OPEN, NULL};
+        }
+
+        ')'		{
+            return (struct token_t) {TOKEN_RIVEST_PARENTHESIS_CLOSE, NULL};
+        }
+
+        decimal ':' @t2 {
+            const long text_size = strtol((const char *)input->token, NULL, 10);
+            if(errno != 0)
+            {
+                return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
+            }
+
+            struct token_string_t *s = (struct token_string_t *)malloc(sizeof(struct token_string_t));
+            if(s == NULL)
+            {
+                return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
+            }
+
+            input->cursor = input->marker = input->token = t2;
+            input_fill(stream,input,1);
+
+            char * text = (char *)malloc(sizeof(char)*text_size);
+            if(text ==NULL)
+            {
+                return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
+            }
+
+            text = strncpy(text, input->token, text_size);
+
+            *s = (struct token_string_t){text_size,text};
+
+            input->cursor = input->marker = input->token = input->token + text_size;
+
+            return (struct token_t) { TOKEN_RIVEST_LPVERBATIM_STRING, s};
+        }
+
+        end		{
+            return (struct token_t) {TOKEN_RIVEST_EOF, NULL} ;
+        }
+
+        *       {
+            return (struct token_t) {TOKEN_RIVEST_ERROR, NULL};
+        }
+    */
+
+    /* this part should not be reached */
+    return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
+}

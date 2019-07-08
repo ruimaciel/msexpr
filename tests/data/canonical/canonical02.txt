@@ -1,0 +1,1 @@
+(4:icon[12:image/bitmap]9:xxxxxxxxx)
