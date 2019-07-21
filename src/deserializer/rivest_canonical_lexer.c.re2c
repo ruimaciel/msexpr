@@ -8,6 +8,8 @@
 
 struct token_t rivest_canonical_lexer(FILE * stream, struct input_t * input)
 {
+    char *t2 = NULL;
+
     assert(stream != NULL);
     assert(input != NULL);
 
@@ -19,7 +21,7 @@ struct token_t rivest_canonical_lexer(FILE * stream, struct input_t * input)
     }
 
     input->token = input->cursor;
-    unsigned char *t2 = input->token;
+    t2 = input->token;
 
     /*!re2c
         re2c:define:YYCTYPE = char;
@@ -40,13 +42,16 @@ struct token_t rivest_canonical_lexer(FILE * stream, struct input_t * input)
         }
 
         decimal ':' @t2 {
+            struct token_string_t *s = NULL;
+            char * text = NULL;
+
             const long text_size = strtol((const char *)input->token, NULL, 10);
             if(errno != 0)
             {
                 return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
             }
 
-            struct token_string_t *s = (struct token_string_t *)malloc(sizeof(struct token_string_t));
+            s = (struct token_string_t *)malloc(sizeof(struct token_string_t));
             if(s == NULL)
             {
                 return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
@@ -55,13 +60,14 @@ struct token_t rivest_canonical_lexer(FILE * stream, struct input_t * input)
             input->cursor = input->marker = input->token = t2;
             input_fill(stream,input,1);
 
-            char * text = (char *)malloc(sizeof(char)*text_size);
+            text = (char *)malloc(sizeof(char)*(text_size+1));
             if(text ==NULL)
             {
                 return (struct token_t) { TOKEN_RIVEST_ERROR, NULL};
             }
 
             text = strncpy(text, input->token, text_size);
+            text[text_size] = '\0';
 
             *s = (struct token_string_t){text_size,text};
 

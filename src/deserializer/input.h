@@ -6,11 +6,11 @@
 #include "token.h"
 
 struct input_t {
-    unsigned char *limit;
-    unsigned char *cursor;
-    unsigned char *marker;
-    unsigned char *buffer;
-    unsigned char *token;	/* points to the beginning of the current lexeme */
+    char *limit;
+    char *cursor;
+    char *marker;
+    char *buffer;
+    char *token;	/* points to the beginning of the current lexeme */
     size_t buffer_size;
     unsigned short padding;
     int has_reached_eof;
