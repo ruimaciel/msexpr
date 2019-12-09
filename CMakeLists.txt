@@ -69,6 +69,7 @@ target_include_directories(${PROJECT_NAME}
 
 set_target_properties(
     ${PROJECT_NAME} PROPERTIES
+    PUBLIC_HEADER "${msexpr_INCLUDES}"
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
@@ -80,3 +81,10 @@ if (${ENABLE_TESTS})
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+install(TARGETS ${PROJECT_NAME}
+    LIBRARY
+    DESTINATION lib
+    PUBLIC_HEADER
+    DESTINATION include/msexpr
+    )
