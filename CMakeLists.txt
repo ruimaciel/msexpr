@@ -5,8 +5,8 @@ project(msexpr
     LANGUAGES C
     )
 
-configure_file(version.h.in
-    "${CMAKE_CURRENT_BINARY_DIR}/version.h" @ONLY
+configure_file(src/version.h.in
+    "${CMAKE_CURRENT_BINARY_DIR}/include/msexpr/version.h" @ONLY
   )
 option(USES_RE2C "Uses re2c to regenerate the lexer files" OFF)
 if(USES_RE2C)
@@ -26,7 +26,7 @@ set(msexpr_INCLUDES
     include/msexpr/sexpr.h
     include/msexpr/serializers.h
     include/msexpr/deserializers.h
-    ${CMAKE_CURRENT_BINARY_DIR}/version.h
+    ${CMAKE_CURRENT_BINARY_DIR}/include/msexpr/version.h
     )
 
 set(msexpr_SOURCES
