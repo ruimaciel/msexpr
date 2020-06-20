@@ -17,14 +17,6 @@ START_TEST(test_sexpr_GIVEN_text_atom_WHEN_new_text_atom_THEN_output_valid_text_
 }
 END_TEST
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 Suite * msexpr_suite(void)
 {
 	Suite *s;

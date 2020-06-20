@@ -141,14 +141,6 @@ START_TEST(test_GIVEN_string_with_nested_verbatim_string_WHEN_call_lexer_three_t
 }
 END_TEST
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 Suite * msexpr_suite(void)
 {
     Suite *s;

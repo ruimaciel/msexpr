@@ -45,14 +45,6 @@ START_TEST(test_sexpr_GIVEN_cursor_has_moved_WHEN_input_fill_THEN_input_becomes_
 }
 END_TEST
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 Suite * msexpr_suite(void)
 {
     Suite *s;

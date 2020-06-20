@@ -30,14 +30,6 @@ START_TEST(test_sexpr_GIVEN_float_atom_WHEN_new_float_atom_THEN_output_valid_flo
 }
 END_TEST
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 Suite * msexpr_suite(void)
 {
     Suite *s;

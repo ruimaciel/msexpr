@@ -59,8 +59,7 @@ struct msexpr_parse_result msexpr_parse_rivest_canonical(FILE *stream)
     msexpr_token_stack_push(&stack, TOKEN_RIVEST_DOCUMENT);
     token = rivest_canonical_lexer(stream, &input);
 
-    while(stack.current_size > 0) /* */
-    /* while(token.token != TOKEN_RIVEST_EOF) /* */
+    while(stack.current_size > 0)
     {
         const enum TOKEN_RIVEST_NT top = msexpr_token_stack_top(&stack);
 

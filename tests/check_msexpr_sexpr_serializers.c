@@ -49,14 +49,6 @@ START_TEST(test_sexpr_GIVEN_cons_cell_with_float_atom_and_null_WHEN_fprint_csexp
 }
 END_TEST
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 Suite * msexpr_suite(void)
 {
     Suite *s;
