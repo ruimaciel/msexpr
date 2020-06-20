@@ -49,14 +49,6 @@ Suite * msexpr_suite(void)
 	return s;
 }
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 int main(void)
 {
 	int number_failed = 0;

@@ -77,14 +77,6 @@ START_TEST(test_sexpr_GIVEN_pointer_to_input_atom_WHEN_cons_input_atom_as_cdr_TH
 }
 END_TEST
 
-//START_TEST(test_sexpr_GIVEN_WHEN_THEN_)
-//{
-//	/* Given */
-//	/* When */
-//	/* Then */
-//}
-//END_TEST
-
 Suite * msexpr_suite(void)
 {
 	Suite *s;

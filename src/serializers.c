@@ -13,7 +13,6 @@ int msexpr_fprint_csexpr(FILE *stream, struct msexpr *sexpr)
         return 0;
     }
 
-
     switch(sexpr->type)
     {
 
