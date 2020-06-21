@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.7)
 
 project(msexpr
-    VERSION 0.0.2.0
+    VERSION 0.0.3.0
     LANGUAGES C
     )
 
@@ -82,22 +82,46 @@ if (${ENABLE_TESTS})
     add_subdirectory(tests)
 endif()
 
-install(TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}
-    LIBRARY DESTINATION lib/${PROJECT_NAME}
-    PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
+install(TARGETS msexpr
+    EXPORT msexprTargets
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+    INCLUDES DESTINATION include
     )
-
-
-install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/include/msexpr/version.h
-  DESTINATION include/${PROJECT_NAME}
-  )
 
 install(
-    EXPORT ${PROJECT_NAME}
-    DESTINATION lib/cmake/${PROJECT_NAME}
+    FILES ${msexpr_INCLUDES}
+    DESTINATION "include/msexpr"
+    COMPONENT Devel
     )
+
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/msexpr/msexpr-config-version.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+    )
+
+export(EXPORT msexprTargets
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/msexpr/msexpr-targets.cmake"
+    )
+
+set(ConfigPackageLocation lib/cmake/msexpr)
+
+install(EXPORT msexprTargets
+    FILE "msexpr-targets.cmake"
+    DESTINATION ${ConfigPackageLocation}
+    )
+
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/msexpr/msexpr-config-version.cmake"
+    DESTINATION ${ConfigPackageLocation}
+    COMPONENT Devel
+)
+
+
 
 #Setup CPACK to generate installer
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
