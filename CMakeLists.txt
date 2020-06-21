@@ -83,46 +83,44 @@ if (${ENABLE_TESTS})
 endif()
 
 install(TARGETS msexpr
-    EXPORT msexprTargets
+    EXPORT msexpr-export
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
     )
 
-install(
-    FILES ${msexpr_INCLUDES}
-    DESTINATION "include/msexpr"
-    COMPONENT Devel
-    )
+install( FILES ${msexpr_INCLUDES}
+    DESTINATION include/msexpr
+)
+
+install(EXPORT msexpr-export
+    FILE msexpr-targets.cmake
+    DESTINATION lib/cmake/msexpr
+)
 
 include(CMakePackageConfigHelpers)
 
+# generate the config file that is includes the exports
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/msexpr-config.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/msexpr-config.cmake"
+    INSTALL_DESTINATION "lib/cmake/example"
+    NO_SET_AND_CHECK_MACRO
+    NO_CHECK_REQUIRED_COMPONENTS_MACRO
+    )
+
+# generate the version file for the config file
 write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/msexpr/msexpr-config-version.cmake"
-    VERSION ${PROJECT_VERSION}
+    "${CMAKE_CURRENT_BINARY_DIR}/msexpr-ConfigVersion.cmake"
+    VERSION "${Tutorial_VERSION_MAJOR}.${Tutorial_VERSION_MINOR}"
     COMPATIBILITY AnyNewerVersion
     )
 
-export(EXPORT msexprTargets
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/msexpr/msexpr-targets.cmake"
+# install the configuration file
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/msexpr-config.cmake
+    DESTINATION lib/cmake/msexpr
     )
-
-set(ConfigPackageLocation lib/cmake/msexpr)
-
-install(EXPORT msexprTargets
-    FILE "msexpr-targets.cmake"
-    DESTINATION ${ConfigPackageLocation}
-    )
-
-install(
-    FILES "${CMAKE_CURRENT_BINARY_DIR}/msexpr/msexpr-config-version.cmake"
-    DESTINATION ${ConfigPackageLocation}
-    COMPONENT Devel
-)
-
-
-
+    
 #Setup CPACK to generate installer
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
