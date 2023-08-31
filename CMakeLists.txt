@@ -74,6 +74,7 @@ set_target_properties(
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
     POSITION_INDEPENDENT_CODE ON
+    SOVERSION 1
     )
 
 option(ENABLE_TESTS "Enable tests" ON)
