@@ -52,7 +52,7 @@ set(msexpr_RE2C
     src/deserializer/rivest_canonical_lexer.c.re2c
     )
 
-add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME} OBJECT
     ${msexpr_INCLUDES}
     ${msexpr_SOURCES}
     ${msexpr_HEADERS}
@@ -67,8 +67,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-set_target_properties(
-    ${PROJECT_NAME} PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
     PUBLIC_HEADER "${msexpr_INCLUDES}"
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
@@ -77,13 +76,33 @@ set_target_properties(
     SOVERSION 1
     )
 
+add_library(${PROJECT_NAME}_SHARED SHARED
+    $<TARGET_OBJECTS:${PROJECT_NAME}>
+)
+
+set_target_properties(${PROJECT_NAME}_SHARED PROPERTIES
+    POSITION_INDEPENDENT_CODE ON
+    OUTPUT_NAME ${PROJECT_NAME}
+    DEBUG_POSTFIX d
+    SOVERSION 1
+    )
+
+add_library(${PROJECT_NAME}_STATIC STATIC
+    $<TARGET_OBJECTS:${PROJECT_NAME}>
+)
+
+set_target_properties(${PROJECT_NAME}_STATIC PROPERTIES
+    OUTPUT_NAME ${PROJECT_NAME}
+    DEBUG_POSTFIX d
+    )
+
 option(ENABLE_TESTS "Enable tests" ON)
 if (${ENABLE_TESTS})
     enable_testing()
     add_subdirectory(tests)
 endif()
 
-install(TARGETS msexpr
+install(TARGETS ${PROJECT_NAME}_SHARED ${PROJECT_NAME}_STATIC
     EXPORT msexpr-export
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib

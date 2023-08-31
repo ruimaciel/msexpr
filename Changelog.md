@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - add SOVERSION.
 - CPack generates .deb following DEB-DEFAULT naming convention.
+- Builds output both shared and static libraries.
 
 ## [1.0.0.0] - 2023-08-31
 ### Added
